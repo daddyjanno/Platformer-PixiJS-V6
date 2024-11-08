@@ -5,6 +5,7 @@ import { Hero } from './Hero'
 import { Platforms } from './Platforms'
 import Matter from 'matter-js'
 import { App } from '../system/App'
+import { LabelScore } from './LabelScore'
 
 export class GameScene extends Scene {
     create() {
@@ -12,6 +13,14 @@ export class GameScene extends Scene {
         this.createHero()
         this.createPlatforms()
         this.setEvents()
+        this.createUI()
+    }
+    createUI() {
+        this.labelScore = new LabelScore()
+        this.container.addChild(this.labelScore)
+        this.hero.sprite.on('score', () => {
+            this.labelScore.renderScore(this.hero.score)
+        })
     }
     createBackground() {
         this.bg = new Background()
@@ -54,6 +63,12 @@ export class GameScene extends Scene {
         if (hero && platform) {
             this.hero.stayOnPlatform(platform.gamePlatform)
         }
+
+        const diamond = colliders.find((body) => body.gameDiamond)
+
+        if (hero && diamond) {
+            this.hero.collectDiamond(diamond.gameDiamond)
+        }
     }
     destroy() {
         Matter.Events.off(
@@ -65,5 +80,6 @@ export class GameScene extends Scene {
         this.bg.destroy()
         this.hero.destroy()
         this.platforms.destroy()
+        this.labelScore.destroy()
     }
 }
