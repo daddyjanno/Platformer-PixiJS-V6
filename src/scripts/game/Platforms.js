@@ -53,8 +53,13 @@ export class Platforms {
         ) {
             this.createPlatform(this.randomData)
         }
+
+        this.platforms.forEach((platform) => platform.move())
+    }
+    destroy() {
         this.platforms.forEach((platform) => {
-            platform.move()
+            platform.destroy()
         })
+        this.container.destroy()
     }
 }
