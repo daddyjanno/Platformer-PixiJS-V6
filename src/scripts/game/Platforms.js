@@ -51,8 +51,10 @@ export class Platforms {
             this.current.container.x + this.current.container.width <
             window.innerWidth
         ) {
-            console.log(this.randomData)
             this.createPlatform(this.randomData)
         }
+        this.platforms.forEach((platform) => {
+            platform.move()
+        })
     }
 }
