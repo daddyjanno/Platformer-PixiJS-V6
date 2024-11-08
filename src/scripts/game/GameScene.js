@@ -7,11 +7,6 @@ import Matter from 'matter-js'
 import { App } from '../system/App'
 
 export class GameScene extends Scene {
-    constructor() {
-        super()
-        this.container = new PIXI.Container()
-        this.create()
-    }
     create() {
         this.createBackground()
         this.createHero()
