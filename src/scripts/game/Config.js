@@ -1,12 +1,12 @@
 import { Tools } from '../system/Tools'
-import { Game } from './Game'
+import { GameScene } from './GameScene'
 
 export const Config = {
     loader: Tools.massiveRequire(
         require['context']('./../../sprites', true, /\.(mp3|png|jpe?g)$/)
     ),
-    startScene: Game,
     scenes: {
-        Game: Game,
+        Game: GameScene,
     },
+    bgSpeed: 2,
 }
