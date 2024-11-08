@@ -16,6 +16,7 @@ class Application {
         this.loader.preload().then(() => this.start())
 
         this.scenes = new ScenesManager()
+        this.app.stage.interactive = true
         this.app.stage.addChild(this.scenes.container)
 
         this.createPhysics()
