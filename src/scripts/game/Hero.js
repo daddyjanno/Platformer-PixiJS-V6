@@ -14,14 +14,18 @@ export class Hero {
         this.jumpIndex = 0
         this.score = 0
     }
+    collectDiamond(diamond) {
+        ++this.score
+        console.log(this.score)
+        Matter.World.remove(App.physics.world, diamond.body)
+        diamond.destroy()
+        diamond.sprite = null
+        this.sprite.emit('score')
+        diamond.destroy()
+    }
     startJump() {
         if (this.platform || this.jumpIndex === 1) {
-            console.log(this.jumpIndex)
             ++this.jumpIndex
-            console.log(this.jumpIndex)
-
-            console.log('platform :', this.platform)
-
             this.platform = null
             Matter.Body.setVelocity(this.body, { x: 0, y: -this.dy })
         }
@@ -46,8 +50,6 @@ export class Hero {
     update() {
         this.sprite.x = this.body.position.x - this.sprite.width / 2
         this.sprite.y = this.body.position.y - this.sprite.height / 2
-
-        console.log(this.body, this.body.position.y)
 
         if (this.sprite.y > window.innerHeight) {
             this.sprite.emit('die')
