@@ -34,4 +34,22 @@ export const Config = {
             },
         },
     },
+    diamonds: {
+        chance: 0.4,
+        offset: {
+            min: 100,
+            max: 200,
+        },
+    },
+    score: {
+        x: 10,
+        y: 10,
+        anchor: 0,
+        style: {
+            fontFamily: 'Verdana',
+            fontWeight: 'bold',
+            fontSize: 44,
+            fill: ['#FF7F50'],
+        },
+    },
 }
