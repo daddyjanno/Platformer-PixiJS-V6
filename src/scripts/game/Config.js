@@ -9,4 +9,10 @@ export const Config = {
         Game: GameScene,
     },
     bgSpeed: 2,
+    hero: {
+        position: {
+            x: 350,
+            y: 595,
+        },
+    },
 }
