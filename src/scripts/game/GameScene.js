@@ -13,8 +13,8 @@ export class GameScene extends Scene {
     }
     create() {
         this.createBackground()
-        this.createHero()
         this.createPlatforms()
+        this.createHero()
     }
     createBackground() {
         this.bg = new Background()
