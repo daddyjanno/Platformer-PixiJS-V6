@@ -1,6 +1,4 @@
-import { Config } from './game/Config'
 import { App } from './system/App'
-
-console.log('PixiJs project template')
+import { Config } from './game/Config'
 
 App.run(Config)
