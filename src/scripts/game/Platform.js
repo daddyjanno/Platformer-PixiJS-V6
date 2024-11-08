@@ -1,9 +1,12 @@
 import * as PIXI from 'pixi.js'
 import { App } from '../system/App'
 import Matter from 'matter-js'
+import { Diamond } from './Diamond'
 
 export class Platform {
     constructor(rows, cols, x) {
+        this.diamonds = []
+
         this.rows = rows
         this.cols = cols
 
@@ -16,6 +19,27 @@ export class Platform {
 
         this.dx = App.config.platforms.moveSpeed
         this.createBody()
+        this.createDiamonds()
+    }
+    createDiamonds() {
+        const y =
+            App.config.diamonds.offset.min +
+            Math.random() *
+                (App.config.diamonds.offset.max -
+                    App.config.diamonds.offset.min)
+
+        for (let i = 0; i < this.cols; i++) {
+            if (Math.random() < App.config.diamonds.chance) {
+                this.createDiamond(this.tileSize * i, -y)
+            }
+        }
+    }
+
+    createDiamond(x, y) {
+        const diamond = new Diamond(x, y)
+        this.container.addChild(diamond.sprite)
+        diamond.createBody()
+        this.diamonds.push(diamond)
     }
     createContainer(x) {
         this.container = new PIXI.Container()
@@ -64,6 +88,7 @@ export class Platform {
     }
     destroy() {
         Matter.World.remove(App.physics.world, this.body)
+        this.diamonds.forEach((diamond) => diamond.destroy())
         this.container.destroy()
     }
 }
