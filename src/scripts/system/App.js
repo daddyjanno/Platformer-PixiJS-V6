@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import * as Matter from 'matter-js'
 import { Loader } from './Loader'
 import { ScenesManager } from './ScenesManager'
 
@@ -16,6 +17,8 @@ class Application {
 
         this.scenes = new ScenesManager()
         this.app.stage.addChild(this.scenes.container)
+
+        this.createPhysics()
     }
 
     res(key) {
@@ -28,6 +31,12 @@ class Application {
 
     start() {
         this.scenes.start('Game')
+    }
+
+    createPhysics() {
+        this.physics = Matter.Engine.create()
+        const runner = Matter.Runner.create()
+        Matter.Runner.run(runner, this.physics)
     }
 }
 
